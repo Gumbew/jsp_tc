@@ -18,7 +18,15 @@ def my_response(data):
     print(data)
 
 
-if __name__ == '__main__':
-    sio.connect('http://localhost:5000')
-    sio.emit('show_goods')
+if __name__ == "__main__":
+    sio.connect("http://localhost:5000")
+    sio.emit("show_goods")
+    sio.emit("make_coffee", {"drink": "Latte", "add": "sugar"})
+    sio.emit("show_goods")
+    sio.emit("make_coffee", {"drink": "Latte"})
+    sio.emit("show_goods")
+    sio.emit("make_coffee", {"drink": "Latte", "add": "ABRA"})
+    sio.emit("show_goods")
+    sio.emit("make_coffee", {"drink": "ABRA", "add": "sugar"})
+    sio.emit("show_goods")
     sio.wait()
