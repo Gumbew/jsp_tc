@@ -1,15 +1,15 @@
+import eventlet.wsgi
 import socketio
-from aiohttp import web
 
-sio = socketio.AsyncServer(async_mode='aiohttp')
+sio = socketio.Server(async_mode='eventlet')
 
-app = web.Application()
-sio.attach(app)
+app = socketio.WSGIApp(sio)
 
 
 @sio.event
 def connect(sid, environ):
     print("Connect ", sid)
+    sio.emit("my_response", "Hi from coffee machine! :)")
 
 
 @sio.event
@@ -18,4 +18,4 @@ def disconnect(sid):
 
 
 if __name__ == '__main__':
-    web.run_app(app, host="localhost", port=5000)
+    eventlet.wsgi.server(eventlet.listen(('localhost', 5000)), app)

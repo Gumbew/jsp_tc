@@ -13,6 +13,11 @@ def disconnect():
     print("disconnected")
 
 
+@sio.event
+def my_response(data):
+    print(data)
+
+
 if __name__ == '__main__':
     sio.connect('http://localhost:5000')
     sio.wait()
