@@ -29,4 +29,5 @@ if __name__ == "__main__":
     sio.emit("show_goods")
     sio.emit("make_coffee", {"drink": "ABRA", "add": "sugar"})
     sio.emit("show_goods")
+    sio.emit("show_orders")
     sio.wait()

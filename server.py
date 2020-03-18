@@ -1,5 +1,6 @@
 import eventlet.wsgi
 import socketio
+import datetime
 
 sio = socketio.Server(async_mode='eventlet')
 
@@ -20,6 +21,8 @@ goods = {
     }
 }
 
+orders = {}
+
 
 @sio.event
 def connect(sid, environ):
@@ -38,14 +41,28 @@ def show_goods(sid):
 
 
 @sio.event
+def show_orders(sid):
+    sio.emit('my_response', {"OK": 200, "Orders": orders})
+
+
+@sio.event
 def make_coffee(sid, data):
     response = validate(data)
     if "OK" in response:
         if 'add' in data:
             goods['adds'][data['add']] -= 1
         goods['drinks'][data['drink']] -= 1
-
+        make_order(sid, data)
     sio.emit('my_response', response)
+
+
+def make_order(sid, data):
+    order = {"time": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "order description": data}
+
+    if sid not in orders:
+        orders[sid] = [order]
+    else:
+        orders[sid].append(order)
 
 
 def validate(data):
