@@ -20,4 +20,5 @@ def my_response(data):
 
 if __name__ == '__main__':
     sio.connect('http://localhost:5000')
+    sio.emit('show_goods')
     sio.wait()
