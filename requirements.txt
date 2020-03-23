@@ -1,0 +1,12 @@
+certifi==2019.11.28
+chardet==3.0.4
+dnspython==1.16.0
+eventlet==0.25.1
+greenlet==0.4.15
+idna==2.9
+monotonic==1.5
+python-engineio==3.12.1
+python-socketio==4.5.1
+requests==2.23.0
+six==1.14.0
+urllib3==1.25.8
