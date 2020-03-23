@@ -70,7 +70,6 @@ class CoffeeMachineNamespace(socketio.Namespace):
     namespace = '/coffee'
     def on_connect(self, sid, environ):
         print("Connect ", sid)
-        sio.emit("my_response", "Hi from coffee machine! :)", namespace=self.namespace)
 
     def on_disconnect(self, sid):
         print('Disconnect ', sid)
